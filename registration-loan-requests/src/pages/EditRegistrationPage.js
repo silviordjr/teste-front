@@ -5,7 +5,7 @@ import { Button, ContainerFlexInputs, Form, Input, LeftContainer, MainRegistrati
 import { cpf } from 'cpf-cnpj-validator'; 
 import { cnpj } from 'cpf-cnpj-validator';
 import { useParams, useHistory } from 'react-router-dom';
-import { goToHome } from '../route/coordinators';
+import { goToErrorPage, goToHome } from '../route/coordinators';
 import { DeleteButton } from '../styles/EditStyle';
 
 function EditPage () {
@@ -56,7 +56,7 @@ function EditPage () {
             atualizaValores(res.data)
         })
         .catch((err) => {
-            console.log(err)
+            goToErrorPage(history)
         })
     }, [])
 
@@ -99,7 +99,7 @@ function EditPage () {
                 goToHome(history)
             })
             .catch((err) => {
-                alert('erro')
+                goToErrorPage(history)
             })
 
         } else {
@@ -119,7 +119,7 @@ function EditPage () {
                 goToHome(history)
             })
             .catch((err) => {
-                console.log(err)
+                goToErrorPage(history)
             })
         }
     }
@@ -153,7 +153,7 @@ function EditPage () {
             setFlagEndereco(!flagEndereco)
         })
         .catch((err) => {
-            console.log (err)
+            goToErrorPage(history)
         })
     }
 
@@ -168,8 +168,8 @@ function EditPage () {
                         {cnpjIsWrong && <p>Você deve informar um CNPJ válido!</p>}
                         <Input placeholder='CNPJ' onBlur={verificaCnpj} onChange={onChange} value={form.cnpj} name='cnpj' type='number' min='0' required />
                         <ContainerFlexInputs>
-                            <input placeholder='Valor Solicitado' onChange={onChange} value={form.solicitado} name='solicitado' type='number' min='0' required />
-                            <input placeholder='Faturamento Anual' onChange={onChange} value={form.faturamento} name='faturamento' type='number' min='0' required />
+                            <input placeholder='Valor Solicitado' onChange={onChange} value={form.solicitado} name='solicitado' type='number' step=".01" min='0' required />
+                            <input placeholder='Faturamento Anual' onChange={onChange} value={form.faturamento} name='faturamento' type='number' step=".01" min='0' required />
                         </ContainerFlexInputs>
                     </div>
 

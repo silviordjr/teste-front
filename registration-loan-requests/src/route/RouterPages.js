@@ -5,6 +5,7 @@ import EditRegistrationPage from "../pages/EditRegistrationPage";
 import RequestsPage from "../pages/RequestsPage";
 import HomePage from "../pages/HomePage";
 import Header from "../components/Header";
+import ErrorPage from "../pages/ErrorPage";
 
 function RouterPages () {
     return(
@@ -26,6 +27,10 @@ function RouterPages () {
 
                 <Route exact path='/registration_details/:id' >
                     <EditRegistrationPage />
+                </Route>
+
+                <Route path="*" >
+                    <ErrorPage />
                 </Route>
 
             </Switch>

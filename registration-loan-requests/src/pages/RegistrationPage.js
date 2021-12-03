@@ -1,14 +1,18 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useForm } from '../hooks/useForm'
-import { Button, ContainerFlexInputs, Form, Input, LeftContainer, MainRegistration, RightContainer } from '../styles/RegistrationStyles'
+import { Button, ContainerFlexInputs, ErrorMessage, Form, Input, LeftContainer, MainRegistration, RightContainer } from '../styles/RegistrationStyles'
 import { cpf } from 'cpf-cnpj-validator'; 
 import { cnpj } from 'cpf-cnpj-validator';
+import { goToErrorPage } from '../route/coordinators';
+import { useHistory } from 'react-router-dom';
+
 
 function RegistrationPage () {
     const [cnpjIsWrong, setCnpjIsWrong] = useState(false)
     const [cpfIsWrong, setCpfIsWrong] = useState(false)
     const [flagEndereco, setFlagEndereco] = useState(false)
+    const history = useHistory()
     const [form, onChange, clear] = useForm({
         cnpj: '',
         solicitado: '',
@@ -66,7 +70,7 @@ function RegistrationPage () {
                 clear()
             })
             .catch((err) => {
-                alert('erro')
+                goToErrorPage(history)
             })
 
         } else {
@@ -116,19 +120,19 @@ function RegistrationPage () {
                 <LeftContainer>
                     <div>
                         <h3>Informações da Empresa</h3>
-                        {cnpjIsWrong && <p>Você deve informar um CNPJ válido!</p>}
+                        {cnpjIsWrong && <ErrorMessage>Você deve informar um CNPJ válido!</ErrorMessage>}
                         <Input placeholder='CNPJ' onBlur={verificaCnpj} onChange={onChange} value={form.cnpj} name='cnpj' type='number' min='0' required />
                         <ContainerFlexInputs>
-                            <input placeholder='Valor Solicitado' onChange={onChange} value={form.solicitado} name='solicitado' type='number' min='0' required />
-                            <input placeholder='Faturamento Anual' onChange={onChange} value={form.faturamento} name='faturamento' type='number' min='0' required />
+                            <input placeholder='Valor Solicitado' onChange={onChange} value={form.solicitado} name='solicitado' type='number' step=".01" min='0' required />
+                            <input placeholder='Faturamento Anual' onChange={onChange} value={form.faturamento} name='faturamento' type='number' step=".01" min='0' required />
                         </ContainerFlexInputs>
                     </div>
 
                     <div>
                         <h3>Informações do Solicitante</h3>
                         <Input placeholder='Nome Completo' onChange={onChange} value={form.nome} name='nome' required />
+                        {cpfIsWrong && <ErrorMessage>Você deve informar um CPF válido!</ErrorMessage>}
                         <ContainerFlexInputs>
-                            {cpfIsWrong && <p>Você deve informar um CPF válido!</p>}
                             <input placeholder='CPF' onBlur={verificaCpf} onChange={onChange} value={form.cpf} name='cpf' type='number' min='0' required />
                             <input placeholder='Telefone' onChange={onChange} value={form.telefone} name='telefone' type='tel' required />
                         </ContainerFlexInputs>
