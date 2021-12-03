@@ -13,3 +13,7 @@ export const goToRequests = (history) => {
 export const goToEdit = (history, id) => {
     history.push(`/registration_details/${id}`)
 }
+
+export const goToErrorPage = (history) => {
+    history.push('/error')
+}

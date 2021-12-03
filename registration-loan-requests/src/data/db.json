@@ -56,6 +56,25 @@
         "numero": "432",
         "complemento": "sala 23"
       }
+    },
+    {
+      "cnpj": "07014697000107",
+      "solicitado": "135000.50",
+      "faturamento": "29500.05",
+      "nome": "José Carlos dos Santos Huerta",
+      "cpf": "24612908066",
+      "telefone": "82986657432",
+      "email": "josecsh@gmail.com",
+      "endereco": {
+        "cep": "57010002",
+        "cidade": "Maceió",
+        "uf": "AL",
+        "rua": "Avenida Siqueira Campos - até 944 - lado par",
+        "bairro": "Prado",
+        "numero": "96",
+        "complemento": "96"
+      },
+      "id": "1638535227560"
     }
   ]
 }

@@ -4,7 +4,7 @@ import { Button, ContainerCabecalho, ContainerInfo, MainCard, MainRequests } fro
 import { cnpj } from 'cpf-cnpj-validator';
 import { cpf } from 'cpf-cnpj-validator'; 
 import { useHistory } from 'react-router-dom';
-import { goToEdit } from '../route/coordinators';
+import { goToEdit, goToErrorPage } from '../route/coordinators';
 
 function RequestsPage () {
     const [requests, setRequests] = useState([])
@@ -15,7 +15,7 @@ function RequestsPage () {
             setRequests(res.data)
         })
         .catch((err) => {
-            console.log(err)
+            goToErrorPage(history)
         })
     }, [])
 
@@ -32,8 +32,8 @@ function RequestsPage () {
                 <ContainerInfo>
                     <h3>INFORMAÇÕES DA EMPRESA</h3>
                     <p><b>CNPJ:</b>  {cnpj.format(request.cnpj)}</p>
-                    <p><b>Faturamento:</b> R${parseFloat(request.faturamento).toFixed(2).toString().replace(".", ",")}</p>
-                    <p><b>Valor Solicitado:</b> R${parseFloat(request.solicitado).toFixed(2).toString().replace(".", ",")}</p>
+                    <p><b>Faturamento:</b> R${parseFloat(request.faturamento).toLocaleString('pt-BR')}</p>
+                    <p><b>Valor Solicitado:</b> R${parseFloat(request.solicitado).toLocaleString('pt-BR')}</p>
                 </ContainerInfo>
                 <ContainerInfo>
                     <h3>INFORMAÇÕES DE ENDEREÇO</h3>

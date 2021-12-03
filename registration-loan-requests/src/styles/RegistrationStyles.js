@@ -121,3 +121,14 @@ export const MainRegistration = styled.div`
         }
     }
 `
+
+export const ErrorMessage = styled.p `
+    color: red;
+    width: 25vw;
+    text-align: center;
+
+    @media(max-width: 800px){
+        width: 76vw;
+       
+    }
+`
